@@ -4,8 +4,6 @@
 
 This repository contains a Foundry reference implementation of a draft subscription permissions standard built on ERC-4337 smart accounts and EIP-7702 EOA delegation.
 
-> The goal of this repository is **not** to launch a product. It is to demonstrate a standard that any wallet, smart account vendor, or merchant can adopt. Think of it as the ERC-20 of subscription payments: a common interface everyone speaks.
-
 ---
 
 ## Why
