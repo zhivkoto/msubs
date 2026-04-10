@@ -88,7 +88,7 @@ interface ISubscriptionRegistry {
     ///      lastChargedAt + periodSeconds <= block.timestamp
     ///      AND status == Active
     ///      AND (expiresAt == 0 OR block.timestamp < expiresAt)
-    ///      Implementations SHOULD paginate — large deployments may have millions of
+    ///      Implementations SHOULD paginate - large deployments may have millions of
     ///      subscriptions and this function MUST NOT exceed block gas limits.
     /// @param cursor  Pagination offset (0 for first page).
     /// @param limit   Maximum number of results to return.

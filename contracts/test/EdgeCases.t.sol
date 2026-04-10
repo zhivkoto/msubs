@@ -56,7 +56,7 @@ contract EdgeCasesTest is SubscriptionTestBase {
         vm.prank(user);
         subscriptionModule.onUninstall(bytes(""));
 
-        // Renewal should revert — subscription is now Cancelled
+        // Renewal should revert - subscription is now Cancelled
         vm.expectRevert(
             abi.encodeWithSelector(SubscriptionLib.SubscriptionNotActive.selector, sid)
         );
@@ -231,7 +231,7 @@ contract EdgeCasesTest is SubscriptionTestBase {
 
     function test_H02_ValidateRenewal_ReturnsFailed_WhenPeriodNotElapsed() public {
         bytes32 sid = _subscribe();
-        // Don't warp — period not elapsed
+        // Don't warp - period not elapsed
 
         bytes32 userOpHash = keccak256("hash");
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(sessionKeyPk, userOpHash);
@@ -261,7 +261,7 @@ contract EdgeCasesTest is SubscriptionTestBase {
         bytes32 sid = _subscribe();
         uint48 startTime = _getPermission(sid).startTime;
 
-        // Try to charge before startTime + periodSeconds — should revert
+        // Try to charge before startTime + periodSeconds - should revert
         vm.warp(uint256(startTime) + PLAN_PERIOD - 1); // 1 second before valid
 
         vm.expectRevert(
@@ -401,7 +401,7 @@ contract EdgeCasesTest is SubscriptionTestBase {
         // Warp past grace period end
         vm.warp(uint256(graceEnd) + 1);
 
-        // Attempt renewal — should expire subscription
+        // Attempt renewal - should expire subscription
         vm.expectEmit(true, false, false, false);
         emit ISubscriptionModule.SubscriptionExpired(sid, "");
         subscriptionModule.processRenewalFor(user, sid);
@@ -534,7 +534,7 @@ contract EdgeCasesTest is SubscriptionTestBase {
         bytes32 sid = _subscribe();
         _warpPeriod();
 
-        // Get all in one page — nextCursor should be type(uint256).max (no more pages)
+        // Get all in one page - nextCursor should be type(uint256).max (no more pages)
         (, uint256 nextCursor) = subscriptionRegistry.getDueSubscriptions(0, 100);
         assertEq(nextCursor, type(uint256).max);
 

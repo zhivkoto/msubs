@@ -30,7 +30,7 @@ import { PackedUserOperation } from "account-abstraction/interfaces/PackedUserOp
 ///      - Each smart account holds its own mapping of subscriptionId → permission.
 ///      - The module calls into SubscriptionRegistry for global indexing.
 ///      - processRenewal() is callable by the session key (via UserOp) or by any
-///        address — on-chain constraints are the security boundary, not caller restriction.
+///        address - on-chain constraints are the security boundary, not caller restriction.
 ///      - ERC-7579 module type: both VALIDATOR (1) and EXECUTOR (2).
 ///
 /// Checks-Effects-Interactions pattern is enforced throughout:
@@ -185,7 +185,7 @@ contract SubscriptionModule is
         return _validateRenewalInternal(userOp.sender, subscriptionId, userOpHash, sig);
     }
 
-    /// @notice ERC-1271 isValidSignatureWithSender — not used for renewals, returns 0xffffffff.
+    /// @notice ERC-1271 isValidSignatureWithSender - not used for renewals, returns 0xffffffff.
     function isValidSignatureWithSender(
         address /*sender*/,
         bytes32 /*hash*/,
@@ -372,7 +372,7 @@ contract SubscriptionModule is
         _activePlanSubscription[account][oldPlanId] = bytes32(0);
         _activePlanSubscription[account][newPlanId] = subscriptionId;
 
-        // Effects — update terms, do NOT reset lastChargedAt
+        // Effects - update terms, do NOT reset lastChargedAt
         perm.planId        = newPlanId;
         perm.maxAmount     = newPlan.amount;
         perm.periodSeconds = newPlan.period;
@@ -409,7 +409,7 @@ contract SubscriptionModule is
     // ─── Renewal Execution ────────────────────────────────────────────────────
 
     /// @inheritdoc ISubscriptionModule
-    /// @dev processRenewal is permissionless — on-chain constraints are the security
+    /// @dev processRenewal is permissionless - on-chain constraints are the security
     ///      boundary. Any caller may submit this; the crank is a liveness mechanism only.
     function processRenewal(bytes32 subscriptionId) external nonReentrant {
         // Get user from registry
@@ -522,7 +522,7 @@ contract SubscriptionModule is
             revert SubscriptionLib.SubscriptionNotFound(subscriptionId);
         }
 
-        // Terminal state — hard revert per ISubscriptionValidator spec
+        // Terminal state - hard revert per ISubscriptionValidator spec
         if (perm.status == SubscriptionStatus.Cancelled || perm.status == SubscriptionStatus.Expired) {
             revert SubscriptionLib.SubscriptionTerminal(subscriptionId);
         }
@@ -537,7 +537,7 @@ contract SubscriptionModule is
             revert SubscriptionLib.SubscriptionExpired(subscriptionId);
         }
 
-        // [H-02] Period elapsed check — MUST per ISubscriptionValidator spec
+        // [H-02] Period elapsed check - MUST per ISubscriptionValidator spec
         // First charge: lastChargedAt == 0, use startTime + periodSeconds
         uint48 earliestNextCharge = perm.lastChargedAt == 0
             ? perm.startTime + perm.periodSeconds

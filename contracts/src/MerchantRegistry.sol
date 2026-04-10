@@ -131,7 +131,7 @@ contract MerchantRegistry is IMerchantRegistry {
         Merchant storage merchant = _merchants[mId];
         if (!merchant.active) revert SubscriptionLib.MerchantInactive(mId);
 
-        // planId = keccak256(authority address, plan name) — globally unique per merchant+name
+        // planId = keccak256(authority address, plan name) - globally unique per merchant+name
         planId = keccak256(abi.encode(msg.sender, name));
 
         if (_plans[planId].planId != bytes32(0)) {

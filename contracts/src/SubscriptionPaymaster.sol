@@ -40,7 +40,7 @@ contract SubscriptionPaymaster is IPaymaster, ISubscriptionPaymaster, Ownable, R
 
     uint256 public constant DAY_SECONDS = 86_400;
 
-    /// @notice Default daily budget per user: 0.01 ETH — generous for renewals at ~$0.001/each.
+    /// @notice Default daily budget per user: 0.01 ETH - generous for renewals at ~$0.001/each.
     uint256 public constant DEFAULT_DAILY_BUDGET = 0.01 ether;
 
     // ─── Allowlisted Selectors ────────────────────────────────────────────────
@@ -160,7 +160,7 @@ contract SubscriptionPaymaster is IPaymaster, ISubscriptionPaymaster, Ownable, R
 
         PaymasterContext memory ctx = abi.decode(context, (PaymasterContext));
 
-        // Only charge budget on success (or revert — bundler charges either way).
+        // Only charge budget on success (or revert - bundler charges either way).
         // On postOpReverted, nothing to record.
         if (mode != PostOpMode.postOpReverted) {
             _consumeDailyBudget(ctx.user, actualGasCost);
@@ -238,7 +238,7 @@ contract SubscriptionPaymaster is IPaymaster, ISubscriptionPaymaster, Ownable, R
     function _checkSubscriptionRateLimit(bytes32 subscriptionId) internal view {
         // Rate limit: the registry's lastChargedAt + periodSeconds tells us when
         // the next renewal is valid. If a renewal has already been processed in
-        // the current period, the on-chain module will revert anyway — we add
+        // the current period, the on-chain module will revert anyway - we add
         // an early paymaster check to save gas.
         try registry.getRecord(subscriptionId) returns (
             address,
@@ -256,8 +256,7 @@ contract SubscriptionPaymaster is IPaymaster, ISubscriptionPaymaster, Ownable, R
                 revert SubscriptionLib.SubscriptionNotActive(subscriptionId);
             }
         } catch {
-            // If registry lookup fails (not registered yet), allow through —
-            // the module will enforce constraints.
+            // If registry lookup fails (not registered yet), allow through -             // the module will enforce constraints.
         }
     }
 

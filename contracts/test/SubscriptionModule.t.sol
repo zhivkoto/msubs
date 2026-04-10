@@ -383,7 +383,7 @@ contract SubscriptionModuleTest is SubscriptionTestBase {
 
         subscriptionModule.processRenewalFor(user, sid); // first renewal
 
-        // Try again immediately — should revert
+        // Try again immediately - should revert
         vm.expectRevert(); // PeriodNotElapsed
         subscriptionModule.processRenewalFor(user, sid);
     }
@@ -492,7 +492,7 @@ contract SubscriptionModuleTest is SubscriptionTestBase {
     function test_ValidateUserOp_ReturnsFailed_WhenPeriodNotElapsed() public {
         bytes32 sid = _subscribe();
 
-        // Do NOT warp — period has not elapsed, validation must return FAILED
+        // Do NOT warp - period has not elapsed, validation must return FAILED
         bytes32 userOpHash = keccak256("test_userop_hash");
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(sessionKeyPk, userOpHash);
         bytes memory sig = abi.encodePacked(r, s, v);
@@ -560,7 +560,7 @@ contract SubscriptionModuleTest is SubscriptionTestBase {
     }
 }
 
-/// @dev Minimal struct for test — avoids importing full PackedUserOperation in test file.
+/// @dev Minimal struct for test - avoids importing full PackedUserOperation in test file.
 struct PackedUserOperationMock {
     address sender;
     bytes   signature;

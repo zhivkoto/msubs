@@ -5,11 +5,11 @@ pragma solidity ^0.8.28;
 
 /// @notice Status of a subscription permission.
 enum SubscriptionStatus {
-    Active,       // 0 — Charging on schedule
-    Paused,       // 1 — User-initiated pause; no charge attempts
-    Cancelled,    // 2 — Permanently cancelled; session key invalidated
-    Expired,      // 3 — Hard expiry reached or max retries exceeded
-    GracePeriod   // 4 — Charge failed; within merchant-configured grace window
+    Active,       // 0 - Charging on schedule
+    Paused,       // 1 - User-initiated pause; no charge attempts
+    Cancelled,    // 2 - Permanently cancelled; session key invalidated
+    Expired,      // 3 - Hard expiry reached or max retries exceeded
+    GracePeriod   // 4 - Charge failed; within merchant-configured grace window
 }
 
 // ─── Structs ──────────────────────────────────────────────────────────────────

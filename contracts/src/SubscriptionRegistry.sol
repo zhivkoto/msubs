@@ -11,7 +11,7 @@ import { ISubscriptionRegistry } from "./interfaces/ISubscriptionRegistry.sol";
 /// @title SubscriptionRegistry
 /// @notice Global singleton registry indexing all subscription permissions.
 /// @dev This contract holds NO user funds and has NO transfer authority.
-///      It is a pure index/mirror — the SubscriptionModule is the authoritative
+///      It is a pure index/mirror - the SubscriptionModule is the authoritative
 ///      source for permission state. The registry mirrors status and lastChargedAt
 ///      for efficient off-chain crank queries and wallet visibility.
 ///

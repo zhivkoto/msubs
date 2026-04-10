@@ -196,7 +196,7 @@ contract IntegrationTest is SubscriptionTestBase {
         bytes32 sid = _subscribe();
         _warpPeriod();
 
-        // Attacker uses session key to trigger renewal — should succeed (bounded)
+        // Attacker uses session key to trigger renewal - should succeed (bounded)
         address attacker = makeAddr("attacker");
         vm.prank(attacker);
         subscriptionModule.processRenewalFor(user, sid); // attacker triggers it
@@ -214,7 +214,7 @@ contract IntegrationTest is SubscriptionTestBase {
         vm.prank(user);
         subscriptionModule.rotateSessionKey(sid, newKey);
 
-        // Old session key is now dead — but the on-chain enforcement is what matters
+        // Old session key is now dead - but the on-chain enforcement is what matters
         // (validateUserOp would now reject old key signatures)
         assertEq(_getPermission(sid).sessionKey, newKey);
 
@@ -387,7 +387,7 @@ contract IntegrationTest is SubscriptionTestBase {
         vm.prank(user);
         token.transfer(makeAddr("drain"), bal);
 
-        // Renewal should NOT revert — it emits SubscriptionFailed and handles gracefully
+        // Renewal should NOT revert - it emits SubscriptionFailed and handles gracefully
         // (M-03 fix: processRenewal catches transfer failures instead of reverting)
         vm.expectEmit(true, false, false, false);
         emit ISubscriptionModule.SubscriptionFailed(sid, 1, "");
@@ -413,7 +413,7 @@ contract IntegrationTest is SubscriptionTestBase {
         assertTrue(sid1 != sid2);
 
         SubscriptionPermission memory p2 = _getPermission(sid2);
-        assertEq(p2.lastChargedAt, 0);    // fresh — no previous charges
+        assertEq(p2.lastChargedAt, 0);    // fresh - no previous charges
         assertEq(uint8(p2.status), uint8(SubscriptionStatus.Active));
     }
 

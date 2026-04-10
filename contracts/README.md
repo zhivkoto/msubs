@@ -1,4 +1,4 @@
-# MIP Subscription Permissions — Reference Implementation
+# MIP Subscription Permissions - Reference Implementation
 
 This directory contains the canonical Foundry reference implementation of the [MIP Subscription Permissions Standard](../MIP-subscription-permissions.md).
 
@@ -76,9 +76,9 @@ All state changes occur before external calls (ERC-20 transfers).
 `processRenewal` and `processRenewalFor` are protected by `nonReentrant`.
 
 ### Access Control
-- `subscribe`, `cancel`, `pause`, `resume`, `update`, `rotateSessionKey` — only callable by the smart account (msg.sender == account).
-- `processRenewal` / `processRenewalFor` — permissionless; on-chain constraints are the security boundary.
-- Registry writes — only callable by the module that registered the subscription.
+- `subscribe`, `cancel`, `pause`, `resume`, `update`, `rotateSessionKey` - only callable by the smart account (msg.sender == account).
+- `processRenewal` / `processRenewalFor` - permissionless; on-chain constraints are the security boundary.
+- Registry writes - only callable by the module that registered the subscription.
 
 ---
 
@@ -202,10 +202,10 @@ forge script script/Deploy.s.sol \
 
 ### Deployment order
 
-1. `MerchantRegistry` — no constructor args
-2. `SubscriptionRegistry` — no constructor args
-3. `SubscriptionModule` — args: `(registry, merchantRegistry, treasury)`
-4. `SubscriptionPaymaster` — args: `(entryPoint, registry)`
+1. `MerchantRegistry` - no constructor args
+2. `SubscriptionRegistry` - no constructor args
+3. `SubscriptionModule` - args: `(registry, merchantRegistry, treasury)`
+4. `SubscriptionPaymaster` - args: `(entryPoint, registry)`
 5. Fund paymaster: `addStake` + `deposit`
 
 ---
@@ -222,7 +222,7 @@ Monad's gas costs (~$0.001/tx) make the `SubscriptionPaymaster` economically via
 
 ### Parallel Execution
 
-Monad's parallel execution engine handles concurrent renewal transactions efficiently. The registry's paginated `getDueSubscriptions` design is intentional — cranks can shard pages across parallel workers.
+Monad's parallel execution engine handles concurrent renewal transactions efficiently. The registry's paginated `getDueSubscriptions` design is intentional - cranks can shard pages across parallel workers.
 
 ### EntryPoint Address
 
@@ -234,7 +234,7 @@ The ERC-4337 EntryPoint v0.7 address on Monad testnet should be verified via [Bi
 
 ### 1. Concrete type imports over interfaces in core contracts
 
-`SubscriptionModule` imports `SubscriptionRegistry` and `MerchantRegistry` directly (not via their interfaces) to access auxiliary view functions (`getRecord`, `getMerchantIdByReceiver`) not in the standard interface. This is a reference implementation trade-off — in a production deployment, these could be extended interfaces.
+`SubscriptionModule` imports `SubscriptionRegistry` and `MerchantRegistry` directly (not via their interfaces) to access auxiliary view functions (`getRecord`, `getMerchantIdByReceiver`) not in the standard interface. This is a reference implementation trade-off - in a production deployment, these could be extended interfaces.
 
 ### 2. `_activePlanSubscription` mapping for duplicate prevention
 
