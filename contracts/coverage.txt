@@ -1,0 +1,162 @@
+Warning: `--ir-minimum` enables `viaIR` with minimum optimization, which can result in inaccurate source mappings.
+Only use this flag as a workaround if you are experiencing "stack too deep" errors.
+Note that `viaIR` is production ready since Solidity 0.8.13 and above.
+See more: https://book.getfoundry.sh/guides/best-practices/stack-too-deep
+Compiling 55 files with Solc 0.8.28
+Solc 0.8.28 finished in 3.84s
+Compiler run successful with warnings:
+Warning (2018): Function state mutability can be restricted to pure
+   --> test/Integration.t.sol:265:5:
+    |
+265 |     function test_EIP712_TypeHashConsistency() public view {
+    |     ^ (Relevant source part starts here and spans across multiple lines).
+
+Analysing contracts...
+Running tests...
+
+Ran 24 tests for test/SubscriptionRegistry.t.sol:SubscriptionRegistryTest
+[PASS] test_GetActiveSubscriptionsForWallet() (gas: 377931)
+[PASS] test_GetActiveSubscriptionsForWallet_ExcludesCancelled() (gas: 373405)
+[PASS] test_GetActiveSubscriptionsForWallet_IncludesGracePeriod() (gas: 382216)
+[PASS] test_GetActiveSubscriptionsForWallet_IncludesPaused() (gas: 381898)
+[PASS] test_GetDueSubscriptions_DueAfterPeriod() (gas: 369117)
+[PASS] test_GetDueSubscriptions_EmptyOnFreshSub() (gas: 366533)
+[PASS] test_GetDueSubscriptions_NotDueAfterExpiry() (gas: 368277)
+[PASS] test_GetDueSubscriptions_NotDueWhenPaused() (gas: 372070)
+[PASS] test_GetDueSubscriptions_Pagination() (gas: 1456163)
+[PASS] test_GetRecord_RevertNotRegistered() (gas: 18654)
+[PASS] test_RecordCharge_EmitsEvent() (gas: 367479)
+[PASS] test_RecordCharge_RevertUnauthorized() (gas: 368690)
+[PASS] test_RecordCharge_Success() (gas: 375691)
+[PASS] test_Register_EmitsEvent() (gas: 363479)
+[PASS] test_Register_IncrementsTotalCount() (gas: 361365)
+[PASS] test_Register_RevertDuplicate() (gas: 365888)
+[PASS] test_Register_RevertZeroUser() (gas: 34299)
+[PASS] test_Register_Success() (gas: 372541)
+[PASS] test_Register_UpdatesMerchantIndex() (gas: 364661)
+[PASS] test_Register_UpdatesUserIndex() (gas: 362385)
+[PASS] test_UpdateStatus_EmitsEvent() (gas: 366781)
+[PASS] test_UpdateStatus_RevertNotModule() (gas: 367522)
+[PASS] test_UpdateStatus_RevertNotRegistered() (gas: 19546)
+[PASS] test_UpdateStatus_Success() (gas: 375600)
+Suite result: ok. 24 passed; 0 failed; 0 skipped; finished in 9.61ms (5.17ms CPU time)
+
+Ran 21 tests for test/MerchantRegistry.t.sol:MerchantRegistryTest
+[PASS] testFuzz_RegisterMerchant_AnyValidReceiver(address) (runs: 256, μ: 165400, ~: 165400)
+[PASS] testFuzz_RegisterPlan_AnyValidParams(uint256,uint32) (runs: 256, μ: 352495, ~: 352495)
+[PASS] test_DeprecatePlan_RevertNotFound() (gas: 16777)
+[PASS] test_DeprecatePlan_RevertUnauthorized() (gas: 342868)
+[PASS] test_DeprecatePlan_Success() (gas: 330657)
+[PASS] test_GetMerchantIdByAuthority() (gas: 163040)
+[PASS] test_GetMerchantIdByReceiver() (gas: 172460)
+[PASS] test_MultiplePlans_SameMerchant() (gas: 521602)
+[PASS] test_RegisterMerchant_EmitsEvent() (gas: 165411)
+[PASS] test_RegisterMerchant_RevertAuthorityAlreadyHasMerchant() (gas: 173109)
+[PASS] test_RegisterMerchant_RevertDuplicateReceiver() (gas: 170338)
+[PASS] test_RegisterMerchant_RevertZeroReceiver() (gas: 14703)
+[PASS] test_RegisterMerchant_Success() (gas: 194680)
+[PASS] test_RegisterPlan_EmitsEvent() (gas: 338721)
+[PASS] test_RegisterPlan_RevertDuplicate() (gas: 343757)
+[PASS] test_RegisterPlan_RevertNameTooLong() (gas: 169709)
+[PASS] test_RegisterPlan_RevertNotAuthority() (gas: 175459)
+[PASS] test_RegisterPlan_RevertZeroAmount() (gas: 167835)
+[PASS] test_RegisterPlan_RevertZeroPeriod() (gas: 168174)
+[PASS] test_RegisterPlan_RevertZeroToken() (gas: 165752)
+[PASS] test_RegisterPlan_Success() (gas: 347692)
+Suite result: ok. 21 passed; 0 failed; 0 skipped; finished in 72.88ms (107.12ms CPU time)
+
+Ran 17 tests for test/Integration.t.sol:IntegrationTest
+[PASS] testFuzz_PeriodBoundary_ExactlyAtBoundary(uint32) (runs: 256, μ: 792637, ~: 792637)
+[PASS] testFuzz_SubscriptionId_Deterministic(address,address,bytes32,uint256) (runs: 256, μ: 4359, ~: 4379)
+[PASS] test_CrankQuery_FindsDueSubscriptions() (gas: 755909)
+[PASS] test_EIP712_TypeHashConsistency() (gas: 638)
+[PASS] test_FullLifecycle_HardExpiry() (gas: 717928)
+[PASS] test_FullLifecycle_PauseResume() (gas: 817151)
+[PASS] test_FullLifecycle_SetupRenewalCancel() (gas: 767568)
+[PASS] test_InsufficientBalance_ReventsRenewal() (gas: 730183)
+[PASS] test_MerchantPriceChange_ExistingSubscriberUnaffected() (gas: 1599060)
+[PASS] test_MultipleSubscriptions_SameAccount() (gas: 1497274)
+[PASS] test_MultipleUsers_SameMerchant() (gas: 1440509)
+[PASS] test_Registry_MirrorsModuleState() (gas: 654660)
+[PASS] test_Registry_RecordsChargeTimestamp() (gas: 741176)
+[PASS] test_Resubscribe_AfterCancel_GetsFreshPermission() (gas: 1192378)
+[PASS] test_SessionKeyCompromise_BoundedBlastRadius() (gas: 784348)
+[PASS] test_UpgradeFlow() (gas: 987737)
+[PASS] test_WalletVisibility_CrossAccountAggregation() (gas: 661827)
+Suite result: ok. 17 passed; 0 failed; 0 skipped; finished in 73.10ms (127.26ms CPU time)
+
+Ran 47 tests for test/SubscriptionModule.t.sol:SubscriptionModuleTest
+[PASS] testFuzz_ProcessRenewal_PeriodBoundary(uint32) (runs: 256, μ: 740267, ~: 740267)
+[PASS] testFuzz_Subscribe_SessionKeyNeverZero(address) (runs: 256, μ: 648770, ~: 648770)
+[PASS] test_Cancel_RemovesFromActiveList() (gas: 605435)
+[PASS] test_Cancel_RevertAlreadyCancelled() (gas: 587030)
+[PASS] test_Cancel_RevertNotFound() (gas: 17785)
+[PASS] test_Cancel_Success() (gas: 596008)
+[PASS] test_GetActiveSubscriptions_ExcludesCancelled() (gas: 587922)
+[PASS] test_GetActiveSubscriptions_IncludesPaused() (gas: 672595)
+[PASS] test_GetActiveSubscriptions_ReturnsActive() (gas: 661698)
+[PASS] test_IsModuleType() (gas: 15661)
+[PASS] test_OnInstall_MarksInitialized() (gas: 46170)
+[PASS] test_OnInstall_RevertAlreadyInitialized() (gas: 18870)
+[PASS] test_OnUninstall_ClearsInitialization() (gas: 20756)
+[PASS] test_Pause_RevertNotActive() (gas: 659216)
+[PASS] test_Pause_Success() (gas: 664668)
+[PASS] test_ProcessRenewal_AllowsFirstChargeWithoutPreviousCharge() (gas: 739243)
+[PASS] test_ProcessRenewal_EmitsChargedEvent() (gas: 734931)
+[PASS] test_ProcessRenewal_MarksExpiredOnHardExpiry() (gas: 626902)
+[PASS] test_ProcessRenewal_MultipleSuccessivePeriods() (gas: 817663)
+[PASS] test_ProcessRenewal_RevertNotActive() (gas: 665528)
+[PASS] test_ProcessRenewal_RevertPeriodNotElapsed() (gas: 738519)
+[PASS] test_ProcessRenewal_Success() (gas: 753860)
+[PASS] test_ProcessRenewal_UpdatesLastChargedAt() (gas: 738899)
+[PASS] test_Resume_RevertAfterHardExpiry() (gas: 660644)
+[PASS] test_Resume_RevertNotPaused() (gas: 645820)
+[PASS] test_Resume_Success() (gas: 678235)
+[PASS] test_RotateSessionKey_RevertTerminal() (gas: 591675)
+[PASS] test_RotateSessionKey_RevertZeroKey() (gas: 645517)
+[PASS] test_RotateSessionKey_Success() (gas: 661703)
+[PASS] test_Subscribe_AllowsResubscribeAfterCancel() (gas: 1092401)
+[PASS] test_Subscribe_EmitsEvent() (gas: 651092)
+[PASS] test_Subscribe_RegistersInRegistry() (gas: 646024)
+[PASS] test_Subscribe_RevertDeprecatedPlan() (gas: 60971)
+[PASS] test_Subscribe_RevertDuplicateActive() (gas: 657754)
+[PASS] test_Subscribe_RevertInvalidPlan() (gas: 45319)
+[PASS] test_Subscribe_RevertNotInitialized() (gas: 24376)
+[PASS] test_Subscribe_RevertZeroSessionKey() (gas: 17490)
+[PASS] test_Subscribe_Success() (gas: 659689)
+[PASS] test_Subscribe_WithExpiry() (gas: 651368)
+[PASS] test_Update_DoesNotResetLastChargedAt() (gas: 949693)
+[PASS] test_Update_RevertOnTerminalSubscription() (gas: 769325)
+[PASS] test_Update_RevertWrongMerchant() (gas: 987968)
+[PASS] test_Update_Success() (gas: 868493)
+[PASS] test_ValidateRenewal_RevertExpired() (gas: 650961)
+[PASS] test_ValidateRenewal_RevertTerminal() (gas: 589071)
+[PASS] test_ValidateUserOp_InvalidSignature() (gas: 653302)
+[PASS] test_ValidateUserOp_ValidSessionKeySignature() (gas: 656637)
+Suite result: ok. 47 passed; 0 failed; 0 skipped; finished in 99.94ms (120.33ms CPU time)
+
+Ran 4 test suites in 112.95ms (255.54ms CPU time): 109 tests passed, 0 failed, 0 skipped (109 total tests)
+
+╭---------------------------------------+------------------+------------------+----------------+----------------╮
+| File                                  | % Lines          | % Statements     | % Branches     | % Funcs        |
++===============================================================================================================+
+| script/Deploy.s.sol                   | 0.00% (0/37)     | 0.00% (0/46)     | 0.00% (0/2)    | 0.00% (0/1)    |
+|---------------------------------------+------------------+------------------+----------------+----------------|
+| src/MerchantRegistry.sol              | 100.00% (45/45)  | 97.87% (46/47)   | 91.67% (11/12) | 100.00% (8/8)  |
+|---------------------------------------+------------------+------------------+----------------+----------------|
+| src/SubscriptionModule.sol            | 88.83% (175/197) | 88.24% (210/238) | 73.53% (25/34) | 80.77% (21/26) |
+|---------------------------------------+------------------+------------------+----------------+----------------|
+| src/SubscriptionPaymaster.sol         | 0.00% (0/78)     | 0.00% (0/76)     | 0.00% (0/17)   | 0.00% (0/18)   |
+|---------------------------------------+------------------+------------------+----------------+----------------|
+| src/SubscriptionRegistry.sol          | 98.68% (75/76)   | 97.67% (84/86)   | 83.33% (10/12) | 100.00% (9/9)  |
+|---------------------------------------+------------------+------------------+----------------+----------------|
+| src/libraries/SubscriptionLib.sol     | 60.00% (12/20)   | 55.00% (11/20)   | 0.00% (0/3)    | 60.00% (3/5)   |
+|---------------------------------------+------------------+------------------+----------------+----------------|
+| test/SubscriptionPaymaster.t.sol      | 0.00% (0/15)     | 0.00% (0/9)      | 0.00% (0/2)    | 0.00% (0/6)    |
+|---------------------------------------+------------------+------------------+----------------+----------------|
+| test/helpers/MockERC20.sol            | 50.00% (4/8)     | 50.00% (2/4)     | 100.00% (0/0)  | 50.00% (2/4)   |
+|---------------------------------------+------------------+------------------+----------------+----------------|
+| test/helpers/SubscriptionTestBase.sol | 100.00% (26/26)  | 100.00% (22/22)  | 100.00% (0/0)  | 100.00% (5/5)  |
+|---------------------------------------+------------------+------------------+----------------+----------------|
+| Total                                 | 67.13% (337/502) | 68.43% (375/548) | 56.10% (46/82) | 58.54% (48/82) |
+╰---------------------------------------+------------------+------------------+----------------+----------------╯

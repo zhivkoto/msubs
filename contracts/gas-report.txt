@@ -1,0 +1,245 @@
+No files changed, compilation skipped
+
+Ran 24 tests for test/SubscriptionRegistry.t.sol:SubscriptionRegistryTest
+[PASS] test_GetActiveSubscriptionsForWallet() (gas: 395153)
+[PASS] test_GetActiveSubscriptionsForWallet_ExcludesCancelled() (gas: 409508)
+[PASS] test_GetActiveSubscriptionsForWallet_IncludesGracePeriod() (gas: 422899)
+[PASS] test_GetActiveSubscriptionsForWallet_IncludesPaused() (gas: 423105)
+[PASS] test_GetDueSubscriptions_DueAfterPeriod() (gas: 380132)
+[PASS] test_GetDueSubscriptions_EmptyOnFreshSub() (gas: 376983)
+[PASS] test_GetDueSubscriptions_NotDueAfterExpiry() (gas: 377777)
+[PASS] test_GetDueSubscriptions_NotDueWhenPaused() (gas: 409092)
+[PASS] test_GetDueSubscriptions_Pagination() (gas: 1565758)
+[PASS] test_GetRecord_RevertNotRegistered() (gas: 14494)
+[PASS] test_RecordCharge_EmitsEvent() (gas: 401851)
+[PASS] test_RecordCharge_RevertUnauthorized() (gas: 395951)
+[PASS] test_RecordCharge_Success() (gas: 419592)
+[PASS] test_Register_EmitsEvent() (gas: 371723)
+[PASS] test_Register_IncrementsTotalCount() (gas: 377497)
+[PASS] test_Register_RevertDuplicate() (gas: 400182)
+[PASS] test_Register_RevertZeroUser() (gas: 55512)
+[PASS] test_Register_Success() (gas: 394374)
+[PASS] test_Register_UpdatesMerchantIndex() (gas: 377621)
+[PASS] test_Register_UpdatesUserIndex() (gas: 375357)
+[PASS] test_UpdateStatus_EmitsEvent() (gas: 401283)
+[PASS] test_UpdateStatus_RevertNotModule() (gas: 394969)
+[PASS] test_UpdateStatus_RevertNotRegistered() (gas: 38062)
+[PASS] test_UpdateStatus_Success() (gas: 419578)
+Suite result: ok. 24 passed; 0 failed; 0 skipped; finished in 3.40ms (1.64ms CPU time)
+
+Ran 17 tests for test/Integration.t.sol:IntegrationTest
+[PASS] testFuzz_PeriodBoundary_ExactlyAtBoundary(uint32) (runs: 256, μ: 872040, ~: 872040)
+[PASS] testFuzz_SubscriptionId_Deterministic(address,address,bytes32,uint256) (runs: 256, μ: 2122, ~: 2196)
+[PASS] test_CrankQuery_FindsDueSubscriptions() (gas: 786107)
+[PASS] test_EIP712_TypeHashConsistency() (gas: 327)
+[PASS] test_FullLifecycle_HardExpiry() (gas: 866504)
+[PASS] test_FullLifecycle_PauseResume() (gas: 969413)
+[PASS] test_FullLifecycle_SetupRenewalCancel() (gas: 995937)
+[PASS] test_InsufficientBalance_ReventsRenewal() (gas: 766805)
+[PASS] test_MerchantPriceChange_ExistingSubscriberUnaffected() (gas: 1787438)
+[PASS] test_MultipleSubscriptions_SameAccount() (gas: 1631974)
+[PASS] test_MultipleUsers_SameMerchant() (gas: 1593147)
+[PASS] test_Registry_MirrorsModuleState() (gas: 883555)
+[PASS] test_Registry_RecordsChargeTimestamp() (gas: 759980)
+[PASS] test_Resubscribe_AfterCancel_GetsFreshPermission() (gas: 1343240)
+[PASS] test_SessionKeyCompromise_BoundedBlastRadius() (gas: 861778)
+[PASS] test_UpgradeFlow() (gas: 1148057)
+[PASS] test_WalletVisibility_CrossAccountAggregation() (gas: 656762)
+Suite result: ok. 17 passed; 0 failed; 0 skipped; finished in 26.77ms (43.65ms CPU time)
+
+Ran 21 tests for test/MerchantRegistry.t.sol:MerchantRegistryTest
+[PASS] testFuzz_RegisterMerchant_AnyValidReceiver(address) (runs: 256, μ: 182033, ~: 182111)
+[PASS] testFuzz_RegisterPlan_AnyValidParams(uint256,uint32) (runs: 256, μ: 404253, ~: 404232)
+[PASS] test_DeprecatePlan_RevertNotFound() (gas: 35492)
+[PASS] test_DeprecatePlan_RevertUnauthorized() (gas: 398738)
+[PASS] test_DeprecatePlan_Success() (gas: 413080)
+[PASS] test_GetMerchantIdByAuthority() (gas: 176270)
+[PASS] test_GetMerchantIdByReceiver() (gas: 186346)
+[PASS] test_MultiplePlans_SameMerchant() (gas: 592957)
+[PASS] test_RegisterMerchant_EmitsEvent() (gas: 176413)
+[PASS] test_RegisterMerchant_RevertAuthorityAlreadyHasMerchant() (gas: 203645)
+[PASS] test_RegisterMerchant_RevertDuplicateReceiver() (gas: 201312)
+[PASS] test_RegisterMerchant_RevertZeroReceiver() (gas: 33419)
+[PASS] test_RegisterMerchant_Success() (gas: 216159)
+[PASS] test_RegisterPlan_EmitsEvent() (gas: 368255)
+[PASS] test_RegisterPlan_RevertDuplicate() (gas: 397832)
+[PASS] test_RegisterPlan_RevertNameTooLong() (gas: 204548)
+[PASS] test_RegisterPlan_RevertNotAuthority() (gas: 204006)
+[PASS] test_RegisterPlan_RevertZeroAmount() (gas: 200993)
+[PASS] test_RegisterPlan_RevertZeroPeriod() (gas: 201177)
+[PASS] test_RegisterPlan_RevertZeroToken() (gas: 198720)
+[PASS] test_RegisterPlan_Success() (gas: 391705)
+Suite result: ok. 21 passed; 0 failed; 0 skipped; finished in 26.67ms (53.83ms CPU time)
+
+Ran 47 tests for test/SubscriptionModule.t.sol:SubscriptionModuleTest
+[PASS] testFuzz_ProcessRenewal_PeriodBoundary(uint32) (runs: 256, μ: 754621, ~: 754621)
+[PASS] testFuzz_Subscribe_SessionKeyNeverZero(address) (runs: 256, μ: 643032, ~: 643109)
+[PASS] test_Cancel_RemovesFromActiveList() (gas: 709345)
+[PASS] test_Cancel_RevertAlreadyCancelled() (gas: 700095)
+[PASS] test_Cancel_RevertNotFound() (gas: 36163)
+[PASS] test_Cancel_Success() (gas: 689818)
+[PASS] test_GetActiveSubscriptions_ExcludesCancelled() (gas: 677346)
+[PASS] test_GetActiveSubscriptions_IncludesPaused() (gas: 698749)
+[PASS] test_GetActiveSubscriptions_ReturnsActive() (gas: 655795)
+[PASS] test_IsModuleType() (gas: 16707)
+[PASS] test_OnInstall_MarksInitialized() (gas: 68675)
+[PASS] test_OnInstall_RevertAlreadyInitialized() (gas: 36762)
+[PASS] test_OnUninstall_ClearsInitialization() (gas: 41440)
+[PASS] test_Pause_RevertNotActive() (gas: 702818)
+[PASS] test_Pause_Success() (gas: 690475)
+[PASS] test_ProcessRenewal_AllowsFirstChargeWithoutPreviousCharge() (gas: 754081)
+[PASS] test_ProcessRenewal_EmitsChargedEvent() (gas: 742924)
+[PASS] test_ProcessRenewal_MarksExpiredOnHardExpiry() (gas: 717741)
+[PASS] test_ProcessRenewal_MultipleSuccessivePeriods() (gas: 926661)
+[PASS] test_ProcessRenewal_RevertNotActive() (gas: 707918)
+[PASS] test_ProcessRenewal_RevertPeriodNotElapsed() (gas: 771080)
+[PASS] test_ProcessRenewal_Success() (gas: 792700)
+[PASS] test_ProcessRenewal_UpdatesLastChargedAt() (gas: 753668)
+[PASS] test_Resume_RevertAfterHardExpiry() (gas: 703294)
+[PASS] test_Resume_RevertNotPaused() (gas: 657919)
+[PASS] test_Resume_Success() (gas: 735737)
+[PASS] test_RotateSessionKey_RevertTerminal() (gas: 702445)
+[PASS] test_RotateSessionKey_RevertZeroKey() (gas: 656988)
+[PASS] test_RotateSessionKey_Success() (gas: 678701)
+[PASS] test_Subscribe_AllowsResubscribeAfterCancel() (gas: 1218821)
+[PASS] test_Subscribe_EmitsEvent() (gas: 637957)
+[PASS] test_Subscribe_RegistersInRegistry() (gas: 637122)
+[PASS] test_Subscribe_RevertDeprecatedPlan() (gas: 96587)
+[PASS] test_Subscribe_RevertDuplicateActive() (gas: 683548)
+[PASS] test_Subscribe_RevertInvalidPlan() (gas: 59091)
+[PASS] test_Subscribe_RevertNotInitialized() (gas: 39855)
+[PASS] test_Subscribe_RevertZeroSessionKey() (gas: 36600)
+[PASS] test_Subscribe_Success() (gas: 654705)
+[PASS] test_Subscribe_WithExpiry() (gas: 645873)
+[PASS] test_Update_DoesNotResetLastChargedAt() (gas: 1046281)
+[PASS] test_Update_RevertOnTerminalSubscription() (gas: 895602)
+[PASS] test_Update_RevertWrongMerchant() (gas: 1040277)
+[PASS] test_Update_Success() (gas: 937205)
+[PASS] test_ValidateRenewal_RevertExpired() (gas: 638039)
+[PASS] test_ValidateRenewal_RevertTerminal() (gas: 679328)
+[PASS] test_ValidateUserOp_InvalidSignature() (gas: 639714)
+[PASS] test_ValidateUserOp_ValidSessionKeySignature() (gas: 642943)
+Suite result: ok. 47 passed; 0 failed; 0 skipped; finished in 41.00ms (45.81ms CPU time)
+
+╭----------------------------------------------------+-----------------+--------+--------+--------+---------╮
+| src/MerchantRegistry.sol:MerchantRegistry Contract |                 |        |        |        |         |
++===========================================================================================================+
+| Deployment Cost                                    | Deployment Size |        |        |        |         |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+|                                             789775 |            3433 |        |        |        |         |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+|                                                    |                 |        |        |        |         |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| Function Name                                      | Min             | Avg    | Median | Max    | # Calls |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| deprecatePlan                                      |           23989 |  30015 |  31793 |  31817 |       5 |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getMerchant                                        |            9737 |  14175 |  14181 |  14181 |     798 |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getMerchantIdByAuthority                           |            2398 |   2398 |   2398 |   2398 |       1 |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getMerchantIdByReceiver                            |            2601 |   2601 |   2601 |   2601 |    1056 |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getPlan                                            |           16350 |  16358 |  16359 |  16359 |    1352 |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| isMerchantAuthority                                |            2485 |   2485 |   2485 |   2485 |       1 |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| registerMerchant                                   |           22150 | 166897 | 160629 | 225672 |     599 |
+|----------------------------------------------------+-----------------+--------+--------+--------+---------|
+| registerPlan                                       |           23380 | 185421 | 188278 | 188446 |     341 |
+╰----------------------------------------------------+-----------------+--------+--------+--------+---------╯
+
+╭--------------------------------------------------------+-----------------+--------+--------+--------+---------╮
+| src/SubscriptionModule.sol:SubscriptionModule Contract |                 |        |        |        |         |
++===============================================================================================================+
+| Deployment Cost                                        | Deployment Size |        |        |        |         |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+|                                                2161271 |           10094 |        |        |        |         |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+|                                                        |                 |        |        |        |         |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| Function Name                                          | Min             | Avg    | Median | Max    | # Calls |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| cancel                                                 |           24344 |  50408 |  54947 |  54947 |      13 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getActiveSubscriptions                                 |            3364 |  15282 |  21212 |  21272 |       3 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getActiveSubscriptionsFor                              |            3829 |  21678 |  21677 |  39530 |       3 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getSubscriptionFor                                     |           14381 |  14381 |  14381 |  14381 |    1051 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| isInitialized                                          |            2721 |   2721 |   2721 |   2721 |       4 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| isModuleType                                           |             570 |    589 |    596 |    596 |       4 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| onInstall                                              |           23969 |  44000 |  44299 |  44299 |      68 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| onUninstall                                            |           22101 |  22101 |  22101 |  22101 |       1 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| pause                                                  |           26683 |  41973 |  43885 |  43885 |       9 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| processRenewalFor                                      |           31735 | 104217 | 110505 | 110538 |     804 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| resume                                                 |           26673 |  37047 |  43934 |  43934 |       5 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| rotateSessionKey                                       |           26847 |  28537 |  28583 |  30137 |       4 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| subscribe                                              |           23080 | 609349 | 613845 | 613893 |     832 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| update                                                 |           26776 |  55403 |  66957 |  66957 |       5 |
+|--------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| validateRenewal                                        |            5444 |   7260 |   7294 |   9008 |       4 |
+╰--------------------------------------------------------+-----------------+--------+--------+--------+---------╯
+
+╭------------------------------------------------------------+-----------------+--------+--------+--------+---------╮
+| src/SubscriptionRegistry.sol:SubscriptionRegistry Contract |                 |        |        |        |         |
++===================================================================================================================+
+| Deployment Cost                                            | Deployment Size |        |        |        |         |
+|------------------------------------------------------------+-----------------+--------+--------+--------+---------|
+|                                                     869392 |            3800 |        |        |        |         |
+|------------------------------------------------------------+-----------------+--------+--------+--------+---------|
+|                                                            |                 |        |        |        |         |
+|------------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| Function Name                                              | Min             | Avg    | Median | Max    | # Calls |
+|------------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getActiveSubscriptionsForWallet                            |            8840 |  16984 |  21004 |  21154 |       6 |
+|------------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getDueSubscriptions                                        |            8005 |  10037 |   8220 |  18721 |       9 |
+|------------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getRecord                                                  |            2691 |  16602 |  18341 |  18341 |       9 |
+|------------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getSubscriptionsByMerchant                                 |            5092 |   6223 |   6223 |   7355 |       2 |
+|------------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| getSubscriptionsByUser                                     |            5070 |   5070 |   5070 |   5070 |       2 |
+|------------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| recordCharge                                               |           24502 |  28973 |  31203 |  31215 |       3 |
+|------------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| register                                                   |           28870 | 308737 | 339311 | 339323 |      27 |
+|------------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| totalSubscriptions                                         |            2270 |   2270 |   2270 |   2270 |       2 |
+|------------------------------------------------------------+-----------------+--------+--------+--------+---------|
+| updateStatus                                               |           24113 |  29042 |  30676 |  30676 |       8 |
+╰------------------------------------------------------------+-----------------+--------+--------+--------+---------╯
+
+╭-----------------------------------------------+-----------------+-------+--------+-------+---------╮
+| test/helpers/MockERC20.sol:MockERC20 Contract |                 |       |        |       |         |
++====================================================================================================+
+| Deployment Cost                               | Deployment Size |       |        |       |         |
+|-----------------------------------------------+-----------------+-------+--------+-------+---------|
+|                                        541057 |            3033 |       |        |       |         |
+|-----------------------------------------------+-----------------+-------+--------+-------+---------|
+|                                               |                 |       |        |       |         |
+|-----------------------------------------------+-----------------+-------+--------+-------+---------|
+| Function Name                                 | Min             | Avg   | Median | Max   | # Calls |
+|-----------------------------------------------+-----------------+-------+--------+-------+---------|
+| approve                                       |           46269 | 46269 |  46269 | 46269 |      66 |
+|-----------------------------------------------+-----------------+-------+--------+-------+---------|
+| balanceOf                                     |            2537 |  2537 |   2537 |  2537 |      23 |
+|-----------------------------------------------+-----------------+-------+--------+-------+---------|
+| mint                                          |           50961 | 67542 |  68061 | 68061 |      66 |
+|-----------------------------------------------+-----------------+-------+--------+-------+---------|
+| transfer                                      |           46436 | 46436 |  46436 | 46436 |       1 |
+╰-----------------------------------------------+-----------------+-------+--------+-------+---------╯
+
+
+Ran 4 test suites in 135.07ms (97.84ms CPU time): 109 tests passed, 0 failed, 0 skipped (109 total tests)
