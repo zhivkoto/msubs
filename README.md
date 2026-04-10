@@ -1,8 +1,6 @@
 # msubs — Subscription Permissions Standard for Monad
 
-**A reference implementation of a proposed open standard for onchain recurring payments on Monad.**
-
-This repository contains a Foundry reference implementation of a draft subscription permissions standard built on ERC-4337 smart accounts and EIP-7702 EOA delegation.
+A Foundry reference implementation of a draft subscription permissions standard built on ERC-4337 smart accounts and EIP-7702 EOA delegation.
 
 ---
 
