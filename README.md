@@ -1,10 +1,10 @@
 # msubs — Subscription Permissions Standard for Monad
 
-**A proposed open standard for onchain recurring payments on Monad, and its reference implementation.**
+**A reference implementation of a proposed open standard for onchain recurring payments on Monad.**
 
-This repository contains a draft [Monad Improvement Proposal (MIP)](./MIP-subscription-permissions.md) standardizing subscription permissions on top of ERC-4337 smart accounts and EIP-7702 EOA delegation — plus a complete [Foundry reference implementation](./contracts/) of the standard.
+This repository contains a Foundry reference implementation of a draft subscription permissions standard built on ERC-4337 smart accounts and EIP-7702 EOA delegation.
 
-> The goal of this repository is **not** to launch a product. It is to propose ecosystem infrastructure that any wallet, smart account vendor, or merchant can adopt. Think of it as the ERC-20 of subscription payments: a common interface everyone speaks.
+> The goal of this repository is **not** to launch a product. It is to demonstrate a standard that any wallet, smart account vendor, or merchant can adopt. Think of it as the ERC-20 of subscription payments: a common interface everyone speaks.
 
 ---
 
@@ -25,18 +25,7 @@ The primitives needed to fix this already exist on Monad:
 - **ERC-7579** (modular smart accounts)
 - **EIP-7702** (temporary EOA delegation — works for every MetaMask user, not just smart account holders)
 
-**What's missing is a standard.** That's what this MIP proposes.
-
----
-
-## What this repository contains
-
-| Path | Description |
-|---|---|
-| [`MIP-subscription-permissions.md`](./MIP-subscription-permissions.md) | The Monad Improvement Proposal — 14 sections covering motivation, specification, reference architecture, use cases, security, edge cases, and rationale. Copy-pasteable into any forum or spec site. |
-| [`contracts/`](./contracts/) | Foundry reference implementation of the standard. 5 Solidity contracts, full test suite, gas report, coverage report. |
-| [`contracts/src/`](./contracts/src/) | Source contracts: `SubscriptionModule` (ERC-7579), `SubscriptionRegistry`, `MerchantRegistry`, `SubscriptionPaymaster`, `SubscriptionLib`. |
-| [`contracts/test/`](./contracts/test/) | 163 tests — unit, integration, fuzz. Covers the full subscription lifecycle including grace period, retries, session key rotation, and module uninstall. |
+**What's missing is a standard.** That's what this reference implementation demonstrates.
 
 ---
 
@@ -48,7 +37,7 @@ A user authorizes a subscription with **one signature**. After that, no further 
 
 **Gas is invisible.** A verifying paymaster sponsors all renewal UserOperations, funded by a small protocol fee baked into each charge. Users and merchants never touch gas.
 
-**Failure is graceful.** Failed renewals increment a retry counter and emit `SubscriptionFailed`. After N consecutive failures, the subscription moves to a `GracePeriod`; if still unpaid past the grace window, it transitions to `Expired`. No silent drain, no hidden charges.
+**Failure is graceful.** Failed renewals increment a retry counter and emit `SubscriptionFailed`. After consecutive failures, the subscription moves to a `GracePeriod`; if still unpaid past the grace window, it transitions to `Expired`. No silent drain, no hidden charges.
 
 **Everything is interoperable.** Every implementation speaks the same `SubscriptionPermission` struct, emits the same events, responds to the same wallet visibility interface, and uses the same `monad:subscribe?...` deep-link format. Wallets can display active subscriptions across all vendors in a unified UI. Merchants integrate once.
 
@@ -91,19 +80,28 @@ A user authorizes a subscription with **one signature**. After that, no further 
 
 ---
 
-## Reference implementation status
+## Contents
+
+| Path | Description |
+|---|---|
+| [`contracts/src/`](./contracts/src/) | Solidity source — `SubscriptionModule` (ERC-7579), `SubscriptionRegistry`, `MerchantRegistry`, `SubscriptionPaymaster`, `SubscriptionLib`, and 5 interfaces |
+| [`contracts/test/`](./contracts/test/) | 163 tests — unit, integration, fuzz. Covers the full subscription lifecycle including grace period, retries, session key rotation, and module uninstall |
+| [`contracts/script/`](./contracts/script/) | Deployment script (not executed) |
+| [`contracts/README.md`](./contracts/README.md) | Build, test, and deployment documentation |
+
+---
+
+## Implementation status
 
 | Component | Status |
 |---|---|
-| MIP draft | ✅ Complete (14 sections, ~14 pages) |
-| Core contracts | ✅ Complete (2,018 lines across 5 contracts) |
+| Core contracts | ✅ Complete (~2,000 lines across 5 contracts) |
 | Unit + integration tests | ✅ 163/163 passing |
 | Coverage | ✅ 83% line coverage |
 | Gas report | ✅ Generated ([contracts/gas-report.txt](./contracts/gas-report.txt)) |
-| Internal audit pass | ✅ Completed, Critical + High + Medium findings fixed |
 | External audit | ❌ Required before mainnet deployment |
 | Monad testnet deployment | ❌ Not yet deployed |
-| JS/TS SDK | ❌ Out of scope for v1 reference impl |
+| JS/TS SDK | ❌ Out of scope for this reference impl |
 | Wallet integration | ❌ Requires ecosystem adoption |
 
 ---
@@ -124,11 +122,8 @@ A user authorizes a subscription with **one signature**. After that, no further 
 
 ```bash
 # Clone
-git clone https://github.com/zhivkoto/msubs
+git clone --recursive https://github.com/zhivkoto/msubs
 cd msubs/contracts
-
-# Install dependencies
-forge install
 
 # Build
 forge build
@@ -149,7 +144,7 @@ Full build and test documentation lives in [`contracts/README.md`](./contracts/R
 
 ## Design decisions and rationale
 
-The MIP makes explicit, opinionated design choices. A few of the important ones:
+This reference implementation makes explicit, opinionated design choices:
 
 - **ERC-7579 module over custom contract.** Cross-vendor compatibility by default — any smart account that supports ERC-7579 can install the standard module.
 - **Session keys over permit-based flows.** Scoped, persistent, revocable authorization without recurring user signatures.
@@ -157,15 +152,13 @@ The MIP makes explicit, opinionated design choices. A few of the important ones:
 - **Crank-based renewals over native scheduling.** Monad has no native scheduling primitive, and cranks are a pure liveness mechanism — all validation happens on-chain. The crank cannot charge more, charge early, or charge a different recipient than the permission specifies.
 - **Monad over Ethereum mainnet.** EIP-7702 is supported natively, gas per renewal is roughly $0.001 (trivially sustainable for paymaster economics), parallel execution handles batch renewals at scale, and 2-second finality keeps renewals feeling instant.
 
-See [MIP section 13 — Rationale](./MIP-subscription-permissions.md#13-rationale) for the full reasoning.
-
 ---
 
 ## Contributing
 
 This is an early-stage standards proposal. The most valuable contributions right now are:
 
-1. **Feedback on the MIP** — is anything ambiguous? Does the permission struct cover your use case? Are there corner cases the spec missed?
+1. **Feedback on the design** — is anything ambiguous? Does the permission model cover your use case? Are there corner cases the implementation missed?
 2. **Wallet prototypes** — a proof-of-concept subscription visibility UI in any Monad-compatible wallet
 3. **Merchant integration experiments** — try the reference contracts with a dummy SaaS or content paywall, report friction
 4. **Cross-vendor interop tests** — does the standard module work identically on Biconomy Nexus, ZeroDev Kernel, Safe, and other ERC-7579 accounts?
@@ -177,11 +170,3 @@ Open an issue or a PR. This is meant to be community infrastructure — opinions
 ## License
 
 [MIT](./LICENSE) — this is open standards work. Fork it, ship it, improve it.
-
----
-
-## Author
-
-Zhivko Todorov — [@zhivkoto](https://github.com/zhivkoto)
-
-Head of Ecosystem R&D at LimeChain, 7 years in crypto, building ecosystem-level infrastructure for blockchains.
